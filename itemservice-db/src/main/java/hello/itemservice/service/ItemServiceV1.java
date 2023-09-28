@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor
+@Service //컴포넌트 스캔 대상
+@RequiredArgsConstructor //생성자 자동 생성
 public class ItemServiceV1 implements ItemService {
 
     private final ItemRepository itemRepository;
@@ -32,7 +32,7 @@ public class ItemServiceV1 implements ItemService {
     }
 
     @Override
-    public List<Item> findItems(ItemSearchCond cond) {
+    public List<Item> findItems(ItemSearchCond cond) { //검색조건에 따라 찾기
         return itemRepository.findAll(cond);
     }
 }

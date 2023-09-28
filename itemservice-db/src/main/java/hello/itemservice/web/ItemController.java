@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-@Controller
+@Controller //컴포넌트 스캔 대상
 @RequestMapping("/items")
 @RequiredArgsConstructor
 public class ItemController {

@@ -10,15 +10,16 @@ import org.springframework.util.ObjectUtils;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Repository
+@Repository //컴포넌트 스캔 대상
 public class MemoryItemRepository implements ItemRepository {
 
+    //해시맵으로 된 저장소
     private static final Map<Long, Item> store = new HashMap<>(); //static
     private static long sequence = 0L; //static
 
     @Override
     public Item save(Item item) {
-        item.setId(++sequence);
+        item.setId(++sequence); //id 자동 발급
         store.put(item.getId(), item);
         return item;
     }
@@ -33,7 +34,7 @@ public class MemoryItemRepository implements ItemRepository {
 
     @Override
     public Optional<Item> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+        return Optional.ofNullable(store.get(id)); //get(id)가 널이면 널 반환
     }
 
     @Override
@@ -42,12 +43,12 @@ public class MemoryItemRepository implements ItemRepository {
         Integer maxPrice = cond.getMaxPrice();
         return store.values().stream()
                 .filter(item -> {
-                    if (ObjectUtils.isEmpty(itemName)) {
+                    if (ObjectUtils.isEmpty(itemName)) { //널이거나 비었으면 무시
                         return true;
                     }
                     return item.getItemName().contains(itemName);
                 }).filter(item -> {
-                    if (maxPrice == null) {
+                    if (maxPrice == null) { //널이거나 비었으면 무시
                         return true;
                     }
                     return item.getPrice() <= maxPrice;
@@ -55,6 +56,7 @@ public class MemoryItemRepository implements ItemRepository {
                 .collect(Collectors.toList());
     }
 
+    //테스트 용도로만 사용
     public void clearStore() {
         store.clear();
     }
