@@ -15,7 +15,8 @@ import javax.sql.DataSource;
 @Slf4j
 //@Import(MemoryConfig.class) //앞서 설정한 MemoryConfig를 설정 파일로 사용
 //@Import(JdbcTemplateV3Config.class)
-@Import(MybatisConfig.class)
+//@Import(MybatisConfig.class)
+@Import(JpaConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web") //컨트롤러만 컴포넌트 스캔 사용
 public class ItemServiceApplication {
 
